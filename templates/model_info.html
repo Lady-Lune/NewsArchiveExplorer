@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Model information{% endblock %}
+{% block css %}
+.model-head{padding:1.5rem 0 1rem}.model-head h1{font-size:clamp(2.3rem,6vw,4rem);max-width:12ch}.model-head p{max-width:62ch;margin:.75rem 0 0}
+.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.5rem}
+.model-card{border-top:5px solid var(--a);padding-top:.8rem}.model-card h2{font-size:1.35rem}.model-card h2 span{display:block;color:var(--mut);font:400 .88rem var(--body);margin-top:.3rem}
+.details{display:grid;gap:.8rem;margin:1.25rem 0 0}.details div{border-top:1px solid var(--line);padding-top:.55rem}.details dt{color:var(--mut);font-size:.82rem}.details dd{margin:.15rem 0 0;overflow-wrap:anywhere}
+section{margin-top:2.75rem}.sh{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:.75rem}.sh h2{font-size:1.5rem}
+.flow{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:1rem;align-items:stretch}.node{border:1px solid var(--line);background:var(--panel);padding:1rem;border-radius:var(--r);display:flex;flex-direction:column;justify-content:center}.node strong{font:700 1.2rem var(--disp)}.node span{color:var(--mut);font-size:.9rem;margin-top:.3rem}.arrow{display:flex;align-items:center;justify-content:center;color:var(--a);font:700 1.5rem var(--disp)}
+.branch{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}.branch .node{border-top:4px solid var(--a)}.topic-list{color:var(--mut);font-size:.85rem;margin-top:.6rem;line-height:1.6}.note{margin:.8rem 0 0;color:var(--mut);font-size:.9rem}
+@media(max-width:700px){.model-grid,.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);height:1rem}.branch{grid-template-columns:1fr}}
+{% endblock %}
+{% block content %}
+<header class="model-head"><a class="back mut" href="/">← All topics</a><h1>More about the model</h1><p class="mut">This explorer combines two BERTopic models: a broad 25-topic pass, followed by a focused 8-topic refinement of the largest topic and its outliers.</p></header>
+
+<section><div class="sh"><h2>Model configuration</h2><span class="mut">Loaded from metadata.json</span></div>
+  <div class="model-grid">
+  {% for model in models %}
+    <article class="model-card acc" style="--h:{{ 28 + loop.index * 155 }}"><h2>{{ model.name }}<span>{{ model.nr_topics }} topics</span></h2><dl class="details">
+      <div><dt>c-TF-IDF model</dt><dd>{{ model.ctfidf_model }}</dd></div>
+      <div><dt>Embedding model</dt><dd>{{ model.embedding_model }}</dd></div>
+      <div><dt>HDBSCAN model</dt><dd>{{ model.hdbscan_model }}</dd></div>
+      <div><dt>UMAP model</dt><dd>{{ model.umap_model }}</dd></div>
+    </dl></article>
+  {% endfor %}
+  </div>
+</section>
+
+<section><div class="sh"><h2>How the topics were formed</h2><span class="mut">{{ topics|length }} final topic files</span></div>
+  <div class="flow">
+    <div class="node"><strong>General Topic Model</strong><span>25 broad topics</span><span>Initial clustering of the corpus</span></div><div class="arrow" aria-hidden="true">→</div><div class="node"><strong>Topic 0 refinement</strong><span>8 focused topics</span><span>Applied to one general topic</span></div>
+  </div>
+  <div class="branch">
+    <div class="node"><strong>Retained topics</strong><span>Topic_1 through Topic_23</span><div class="topic-list">23 topics kept from the General Topic Model</div></div>
+    <div class="node"><strong>Refined topic files</strong><span>Topic_-1, Topic_0, Topic_24 through Topic_29</span><div class="topic-list">8 topics produced by the Topic_0 model, including reduced outliers</div></div>
+  </div>
+  <p class="note">The General Topic Model outliers were reassigned with <code>.reduce_outliers()</code>. The final explorer therefore contains the retained general topics alongside the eight refined topic files.</p>
+</section>
+{% endblock %}

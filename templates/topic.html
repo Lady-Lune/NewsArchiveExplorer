@@ -187,7 +187,7 @@ const fmtDate = d => {
 const meter = p => `<span class="meter" title="Match strength ${p.toFixed(2)}"><i><b style="width:${Math.round(p * 100)}%;display:block"></b></i>${Math.round(p * 100)}%</span>`; //t's HDBSCAN membership strength, not a calibrated probability.
 function renderDoc(d) {
   const title = esc(d.headline ?? d.text);
-  const head = d.url ? `<a href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">${title}</a>` : `<span class="t">${title}</span>`;
+  const head = `<span class="t">${title}</span>`;
   const time = d.time || d.published_time;
   return `<article class="hl">${head}<div class="m"><span>${esc(fmtDate(d))}${time ? " at " + esc(time) : ""}</span>${d.category ? `<span title="Original Catagory">${esc(d.category)}</span>` : ""}${meter(+d.probability || 0)}</div></article>`;
 }

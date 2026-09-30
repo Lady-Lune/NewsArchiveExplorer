@@ -20,6 +20,7 @@ class DataStore:
     def __init__(self, data_dir: Path):
         self.data_dir = Path(data_dir)
         self._topics: Optional[list[dict]] = None
+        self._model_metadata: Optional[list[dict]] = None
         self._time_freq: dict[str, dict[int, list[dict]]] = {}
         self._doc_cache: dict[int, list[dict]] = {}
 
@@ -49,6 +50,23 @@ class DataStore:
     @property
     def total_documents(self) -> int:
         return sum(t["frequency"] for t in self.topics)
+
+    @property
+    def model_metadata(self) -> list[dict]:
+        if self._model_metadata is None:
+            raw = json.loads((self.data_dir / "metadata.json").read_text(encoding="utf-8"))
+            self._model_metadata = [
+                {
+                    "name": item.get("name", ""),
+                    "ctfidf_model": item.get("ctfidf_model", ""),
+                    "embedding_model": item.get("embedding_model", ""),
+                    "hdbscan_model": item.get("hdbscan_model", ""),
+                    "umap_model": item.get("umap_model", ""),
+                    "nr_topics": item.get("nr_topics"),
+                }
+                for item in raw
+            ]
+        return self._model_metadata
 
     # -- loaders ---------------------------------------------------------
 

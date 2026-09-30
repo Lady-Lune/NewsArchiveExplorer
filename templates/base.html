@@ -36,7 +36,7 @@ footer{padding:3rem 0 2rem;color:var(--mut);font-size:.85rem}
 </head>
 <body>
 <div class="wrap">
-  <nav class="nav"><a class="brand" href="/">{{ site_title|default("Topic Explorer") }}</a></nav>
+  <nav class="nav"><a class="brand" href="/">{{ site_title|default("Topic Explorer") }}</a><a class="model-link" href="/model-info">More about the model</a></nav>
   {% block content %}{% endblock %}
   <footer>Topics discovered with BERTopic.</footer>
 </div>

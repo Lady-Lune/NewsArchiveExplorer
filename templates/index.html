@@ -5,7 +5,8 @@
 .hero h1{font-size:clamp(2.4rem,6vw,4.2rem);max-width:14ch}
 .hero p{margin:.9rem 0 0;max-width:52ch;font-size:1.05rem}
 .tools{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin:1.75rem 0 1rem}
-.tools input{flex:1;min-width:220px;padding:.6rem .9rem;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);color:var(--ink);font:inherit}
+.compare{padding:.6rem .9rem;border-radius:var(--r);background:var(--ink);color:var(--bg);text-decoration:none;font-size:.88rem;white-space:nowrap}
+.compare:hover{text-decoration:underline;text-underline-offset:3px}
 .rows{border-top:1px solid var(--line)}
 .row{position:relative;display:grid;grid-template-columns:2.6rem 1fr auto;gap:1rem;align-items:center;padding:1rem .75rem;border-bottom:1px solid var(--line);text-decoration:none;overflow:hidden}
 .fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--t);transition:width 1s cubic-bezier(.2,.8,.2,1)}
@@ -27,7 +28,7 @@
   <h1>What {{ "{:,}".format(total_docs) }} headlines are about</h1>
   <p class="mut">The model found {{ num_topics }} topics. Bar length shows each topic's share of the corpus. Select one to see how it changed over time.</p>
   <div class="tools">
-    <input id="q" type="search" placeholder="Search topics or words (press / to focus)" aria-label="Search topics">
+    <a class="compare" href="/compare">Compare topics</a>
     <div class="seg" role="group" aria-label="Sort topics">
       <button aria-pressed="true" data-sort="f">Largest</button>
       <button aria-pressed="false" data-sort="n">A–Z</button>
@@ -50,19 +51,10 @@
   </a>
   {% endfor %}
 </div>
-<p id="none" class="none mut" hidden>No topic matches that search. Try a single word, like "cricket".</p>
-
 <script>
-const grid = document.getElementById("grid"), q = document.getElementById("q");
+const grid = document.getElementById("grid");
 const rows = [...grid.children];
 let sortKey = "f";
-function apply() {
-  const s = q.value.toLowerCase().trim();
-  let n = 0;
-  rows.forEach(r => { const ok = !s || r.dataset.s.includes(s); r.hidden = !ok; n += ok; });
-  document.getElementById("none").hidden = n > 0;
-  document.getElementById("count").textContent = `Showing ${n} of ${rows.length} topics`;
-}
 function sort() {
   const num = sortKey !== "n";
   const dir = sortKey === "f" ? -1 : 1;
@@ -75,9 +67,7 @@ document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click"
   document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", x === b));
   sortKey = b.dataset.sort; sort();
 }));
-q.addEventListener("input", apply);
-addEventListener("keydown", e => { if (e.key === "/" && document.activeElement !== q) { e.preventDefault(); q.focus(); } });
-apply();
+document.getElementById("count").textContent = `${rows.length} topics in the explorer`;
 requestAnimationFrame(() => requestAnimationFrame(() => grid.classList.add("on")));
 </script>
 {% endblock %}

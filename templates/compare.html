@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block title %}Compare topics{% endblock %}
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2/dist/echarts-wordcloud.min.js"></script>
+{% endblock %}
+{% block css %}
+.compare-head{padding:1.5rem 0 1rem}
+.compare-head h1{font-size:clamp(2.3rem,6vw,4rem)}
+.compare-head p{max-width:56ch;margin:.7rem 0 0}
+.pick{display:grid;grid-template-columns:1fr auto 1fr;gap:.75rem;align-items:end;margin:1.5rem 0 2.5rem}
+.pick label{display:grid;gap:.35rem;color:var(--mut);font-size:.88rem}
+.pick select{width:100%;font:inherit;padding:.65rem .7rem;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.pick button{cursor:pointer;font:600 1rem var(--body);padding:.65rem 1rem;border:0;border-radius:var(--r);background:var(--ink);color:var(--bg)}
+section{margin-top:2.75rem}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.sh h2{font-size:1.5rem}
+#timeline{width:100%;height:380px}
+.summary-grid,.cloud-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.summary{border-top:5px solid var(--topic-color);padding-top:.8rem}
+.summary h3{font-size:1.5rem}
+.summary h3 a{text-decoration:none}
+.summary h3 a:hover{text-decoration:underline;text-underline-offset:3px}
+.summary p{margin:.35rem 0;color:var(--mut)}
+.statline{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1rem}
+.statline b{display:block;font:700 1.7rem var(--disp);color:var(--topic-color)}
+.statline span{display:block;color:var(--mut);font-size:.85rem}
+.cloud-panel{min-width:0}
+.cloud-panel h3{font-size:1.2rem;margin-bottom:.5rem;color:var(--topic-color)}
+.cloud{height:300px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.wl{list-style:none;margin:.7rem 0 0;padding:0}
+.wl li{display:grid;grid-template-columns:minmax(6rem,1fr) 2fr 3rem;gap:.65rem;align-items:center;padding:.3rem 0}
+.wl i{display:block;height:7px;border-radius:2px;background:var(--topic-color);opacity:.8}
+.wl small{text-align:right;color:var(--mut)}
+@media(max-width:680px){.pick{grid-template-columns:1fr}.pick button{width:100%}.summary-grid,.cloud-grid{grid-template-columns:1fr}#timeline{height:320px}}
+{% endblock %}
+{% block content %}
+<header class="compare-head">
+  <a class="back mut" href="/">← All topics</a>
+  <h1>Compare topics</h1>
+  <p class="mut">Put two topics on the same timeline, then compare the words and volume that define them.</p>
+</header>
+
+<form class="pick" id="pick">
+  <label>First topic<select id="topic-a" aria-label="First topic"></select></label>
+  <button type="submit">Compare</button>
+  <label>Second topic<select id="topic-b" aria-label="Second topic"></select></label>
+</form>
+
+<section>
+  <div class="sh"><h2>Headlines over time</h2>
+    <div class="seg" role="group" aria-label="Time grouping">
+      <button aria-pressed="false" data-gran="day">By day</button>
+      <button aria-pressed="true" data-gran="month">By month</button>
+      <button aria-pressed="false" data-gran="year">By year</button>
+    </div>
+  </div>
+  <div id="timeline" role="img" aria-label="Comparison of headlines per period"></div>
+</section>
+
+<section>
+  <div class="sh"><h2>Topic overview</h2></div>
+  <div class="summary-grid" id="summaries"></div>
+</section>
+
+<section>
+  <div class="sh"><h2>Words that define them</h2></div>
+  <div class="cloud-grid" id="clouds"></div>
+</section>
+
+<script>
+const topicData = {{ topics | tojson }};
+const topicById = new Map(topicData.map(topic => [String(topic.id), topic]));
+const topicA = document.getElementById("topic-a"), topicB = document.getElementById("topic-b");
+const params = new URLSearchParams(location.search);
+const palette = ["#d14d72", "#287f8f"];
+let granularity = "month", chartData = [], timeline;
+
+function topicLabel(topic) { return `${topic.display_name} (${topic.frequency.toLocaleString()})`; }
+function fillSelect(select, selected) {
+  select.innerHTML = topicData.map(topic => `<option value="${topic.id}">${topicLabel(topic)}</option>`).join("");
+  select.value = topicById.has(String(selected)) ? String(selected) : String(topicData[0].id);
+}
+fillSelect(topicA, params.get("a") ?? topicData[0].id);
+fillSelect(topicB, params.get("b") ?? topicData.find(topic => topic.id !== Number(topicA.value))?.id ?? topicData[0].id);
+
+function selectedTopics() { return [topicById.get(topicA.value), topicById.get(topicB.value)]; }
+function setTopicColor(topic, index) { return `--topic-color:${palette[index]}`; }
+function renderSummaries() {
+  document.getElementById("summaries").innerHTML = selectedTopics().map((topic, index) => `
+    <article class="summary" style="${setTopicColor(topic, index)}">
+      <h3><a href="/topic/${topic.id}">${topic.display_name}</a></h3>
+      <p>${topic.representation.slice(0, 6).join(", ")}</p>
+      <div class="statline">
+        <div><b>${topic.frequency.toLocaleString()}</b><span>headlines</span></div>
+        <div><b>${Number(topic.percentage).toFixed(1)}%</b><span>of corpus</span></div>
+      </div>
+    </article>`).join("");
+}
+
+function aggregate(rows, periodLength) {
+  const totals = {};
+  rows.forEach(row => { const key = String(row.date).slice(0, periodLength); totals[key] = (totals[key] || 0) + row.frequency; });
+  return totals;
+}
+function seriesFor(rows, keys, periodLength) {
+  const totals = aggregate(rows, periodLength);
+  return keys.map(key => totals[key] || 0);
+}
+function drawTimeline() {
+  const periodLength = granularity === "day" ? 10 : granularity === "month" ? 7 : 4;
+  const totals = chartData.map(rows => aggregate(rows, periodLength));
+  const keys = [...new Set(totals.flatMap(values => Object.keys(values)))].sort();
+  const colors = palette;
+  timeline.setOption({
+    color: colors,
+    grid: { left: 48, right: 18, top: 20, bottom: 70 },
+    tooltip: { trigger: "axis", valueFormatter: value => `${value.toLocaleString()} headlines` },
+    legend: { data: selectedTopics().map(topic => topic.display_name), textStyle: { color: getComputedStyle(document.documentElement).getPropertyValue("--mut") } },
+    xAxis: { type: "category", data: keys, boundaryGap: false, axisLabel: { color: getComputedStyle(document.documentElement).getPropertyValue("--mut") } },
+    yAxis: { type: "value", axisLabel: { color: getComputedStyle(document.documentElement).getPropertyValue("--mut") }, splitLine: { lineStyle: { opacity: .25 } } },
+    dataZoom: [{ type: "inside" }, { type: "slider", height: 22, bottom: 8 }],
+    series: selectedTopics().map((topic, index) => ({ name: topic.display_name, type: "line", smooth: .2, showSymbol: false, data: seriesFor(chartData[index], keys, periodLength), lineStyle: { width: 2.5, color: colors[index] }, itemStyle: { color: colors[index] }, areaStyle: { opacity: .08 }, emphasis: { focus: "series" } }))
+  }, true);
+}
+async function loadTimeline() {
+  const apiGranularity = granularity === "day" ? "day" : "month";
+  chartData = await Promise.all(selectedTopics().map(topic => fetch(`/api/topics/${topic.id}/time_frequency?granularity=${apiGranularity}`).then(response => response.json()).then(result => result.data)));
+  drawTimeline();
+}
+
+function renderWords() {
+  document.getElementById("clouds").innerHTML = selectedTopics().map((topic, index) => `
+    <div class="cloud-panel" style="${setTopicColor(topic, index)}">
+      <h3>${topic.display_name}</h3><div class="cloud" id="cloud-${index}" role="img" aria-label="Word cloud for ${topic.display_name}"></div>
+      <ol class="wl">${topic.words.slice().sort((left, right) => right.weight - left.weight).slice(0, 10).map(word => `<li><span>${word.word}</span><i style="width:${(word.weight / topic.words[0].weight * 100).toFixed(0)}%"></i><small>${Number(word.weight).toFixed(4)}</small></li>`).join("")}</ol>
+    </div>`).join("");
+  selectedTopics().forEach((topic, index) => {
+    const words = topic.words.slice().sort((left, right) => right.weight - left.weight);
+    if (!words.length) return;
+    const cloud = echarts.init(document.getElementById(`cloud-${index}`));
+    cloud.setOption({ series: [{ type: "wordCloud", shape: "circle", sizeRange: [14, 58], rotationRange: [-25, 25], rotationStep: 25, gridSize: 8, drawOutOfBound: false, width: "100%", height: "100%", textStyle: { fontFamily: "Bricolage Grotesque, sans-serif", fontWeight: 600, color: () => palette[index] }, emphasis: { textStyle: { color: "#101828" } }, data: words.map(word => ({ name: word.word, value: word.weight })) }] });
+    addEventListener("resize", () => cloud.resize());
+  });
+}
+async function renderComparison() {
+  const [first, second] = selectedTopics();
+  if (first.id === second.id) { topicB.value = String(topicData.find(topic => topic.id !== first.id)?.id ?? first.id); }
+  const nextParams = new URLSearchParams({ a: topicA.value, b: topicB.value });
+  history.replaceState(null, "", `/compare?${nextParams}`);
+  renderSummaries(); renderWords(); await loadTimeline();
+}
+
+timeline = echarts.init(document.getElementById("timeline"));
+document.querySelectorAll("[data-gran]").forEach(button => button.addEventListener("click", () => {
+  document.querySelectorAll("[data-gran]").forEach(other => other.setAttribute("aria-pressed", other === button));
+  granularity = button.dataset.gran; loadTimeline();
+}));
+document.getElementById("pick").addEventListener("submit", event => { event.preventDefault(); renderComparison(); });
+renderComparison();
+</script>
+{% endblock %}

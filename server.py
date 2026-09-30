@@ -35,6 +35,23 @@ async def topic_page(request: Request, topic_id: int):
     })
 
 
+@app.get("/model-info", response_class=HTMLResponse)
+async def model_info_page(request: Request):
+    return templates.TemplateResponse(request=request, name="model_info.html", context={
+        "request": request,
+        "models": store.model_metadata,
+        "topics": store.topics,
+    })
+
+
+@app.get("/compare", response_class=HTMLResponse)
+async def compare_page(request: Request):
+    return templates.TemplateResponse(request=request, name="compare.html", context={
+        "request": request,
+        "topics": store.topics,
+    })
+
+
 # ---- API ---------------------------------------------------------------
 
 @app.get("/api/topics")
@@ -90,4 +107,5 @@ async def api_metadata():
     return {
         "total_documents": store.total_documents,
         "num_topics": len(store.topics),
+        "models": store.model_metadata,
     }
