@@ -29,6 +29,11 @@ section{margin-top:2.75rem}
 .hl a,.hl span.t{font:600 1.1rem/1.35 var(--disp);text-decoration:none}
 .hl a:hover{text-decoration:underline;text-decoration-color:var(--a);text-underline-offset:3px}
 .hl .m{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;margin-top:.35rem;color:var(--mut);font-size:.88rem;align-items:center}
+.feed-tools{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin:.75rem 0 1rem}
+.feed-tools label{display:flex;align-items:center;gap:.5rem;color:var(--mut);font-size:.9rem}
+.feed-tools input[type=range]{width:10rem;accent-color:var(--a)}
+.feed-tools select{font:inherit;padding:.35rem .5rem;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.filter-summary{margin:0 0 .75rem;color:var(--mut);font-size:.9rem}
 .meter{display:inline-flex;align-items:center;gap:.4rem}
 .meter i{width:44px;height:5px;background:var(--line);border-radius:3px;overflow:hidden}
 .meter i b{display:block;height:100%;background:var(--a)}
@@ -56,6 +61,7 @@ section{margin-top:2.75rem}
 <section>
   <div class="sh"><h2>How often it appears</h2>
     <div class="seg" id="gran" role="group" aria-label="Time grouping">
+      <button aria-pressed="false" data-g="day">By day</button>
       <button aria-pressed="true" data-g="month">By month</button>
       <button aria-pressed="false" data-g="year">By year</button>
     </div></div>
@@ -73,6 +79,23 @@ section{margin-top:2.75rem}
 
 <section>
   <div class="sh"><h2>Headlines</h2><span class="mut" id="shown"></span></div>
+  <div class="feed-tools">
+    <label for="min-strength">Minimum match strength <output id="min-strength-value">0%</output></label>
+    <input id="min-strength" type="range" min="0" max="100" value="0" step="1">
+    <label for="headline-sort">Sort by
+      <select id="headline-sort">
+        <option value="default">Original order</option>
+        <option value="strength">Match strength</option>
+      </select>
+    </label>
+    <label for="headline-order">Order
+      <select id="headline-order" disabled>
+        <option value="desc">Descending</option>
+        <option value="asc">Ascending</option>
+      </select>
+    </label>
+  </div>
+  <p class="filter-summary" id="filter-summary"></p>
   <div id="feed" class="feed"></div>
   <div class="more"><button id="more" hidden>Load more headlines</button></div>
 </section>
@@ -99,9 +122,10 @@ const cEl = document.querySelector("[data-count]"), target = +cEl.dataset.count,
 const chart = echarts.init(document.getElementById("timeline"));
 let raw = [], gran = "month";
 function build() {
-  const len = gran === "year" ? 4 : 7, acc = {};
+  const len = gran === "year" ? 4 : gran === "month" ? 7 : 10, acc = {};
   raw.forEach(d => { const k = String(d.date).slice(0, len); acc[k] = (acc[k] || 0) + d.frequency; });
   const keys = Object.keys(acc).sort(); if (!keys.length) return [];
+  if (gran === "day") return keys.map(k => [k, acc[k]]);
   const out = [], end = keys[keys.length - 1];
   let [y, m] = keys[0].split("-").map(Number);
   for (;;) {                                   // zero-fill gaps so the line does not skip quiet periods
@@ -122,14 +146,17 @@ function draw() {
     yAxis: { type: "value", axisLabel: { color: MUT() }, splitLine: { lineStyle: { opacity: .25 } } },
     dataZoom: [{ type: "inside" }, { type: "slider", height: 22, bottom: 8, startValue: start ? start[0] : undefined }],
     series: [{ type: "line", data: pts.map(p => p[1]), smooth: .25, showSymbol: false,
-      lineStyle: { width: 2.5, color }, itemStyle: { color }, areaStyle: { color, opacity: .16 } }]
+      lineStyle: { width: 2.5, color }, itemStyle: { color }, areaStyle: { color, opacity: .16 },
+      emphasis: { disabled: true } }]
   }, true);
 }
 document.querySelectorAll("#gran button").forEach(b => b.addEventListener("click", () => {
   document.querySelectorAll("#gran button").forEach(x => x.setAttribute("aria-pressed", x === b));
-  gran = b.dataset.g; draw();
+  gran = b.dataset.g;
+  fetch(`/api/topics/${TOPIC_ID}/time_frequency?granularity=${gran === "day" ? "day" : "month"}`)
+    .then(r => r.json()).then(({ data }) => { raw = data; draw(); });
 }));
-fetch(`/api/topics/${TOPIC_ID}/time_frequency`).then(r => r.json()).then(({ data }) => { raw = data; draw(); });
+fetch(`/api/topics/${TOPIC_ID}/time_frequency?granularity=month`).then(r => r.json()).then(({ data }) => { raw = data; draw(); });
 
 // ---- Words: cloud + ranked list -----------------------------------
 const words = ({{ topic.words | tojson }}).slice().sort((a, b) => b.weight - a.weight);
@@ -165,20 +192,39 @@ function renderDoc(d) {
   return `<article class="hl">${head}<div class="m"><span>${esc(fmtDate(d))}${time ? " at " + esc(time) : ""}</span>${d.category ? `<span title="Original Catagory">${esc(d.category)}</span>` : ""}${meter(+d.probability || 0)}</div></article>`;
 }
 const feed = document.getElementById("feed"), btn = document.getElementById("more");
-let page = 1, loaded = 0;
+const minStrength = document.getElementById("min-strength"), minStrengthValue = document.getElementById("min-strength-value");
+const headlineSort = document.getElementById("headline-sort"), headlineOrder = document.getElementById("headline-order");
+const filterSummary = document.getElementById("filter-summary");
+let page = 1, loaded = 0, refreshTimer;
 function loadPage(p) {
   btn.disabled = true; btn.textContent = "Loading…";
   if (p === 1) feed.innerHTML = '<div class="sk"></div>'.repeat(4);
-  return fetch(`/api/topics/${TOPIC_ID}/documents?page=${p}&limit=${LIMIT}`).then(r => r.json())
-    .then(({ documents, has_more, total }) => {
+  const threshold = Number(minStrength.value) / 100;
+  const query = new URLSearchParams({ page, limit: LIMIT, min_probability: threshold, sort: headlineSort.value, order: headlineOrder.value });
+  return fetch(`/api/topics/${TOPIC_ID}/documents?${query}`).then(r => r.json())
+    .then(({ documents, has_more, total, total_unfiltered, filtered_out, filtered_percentage }) => {
       if (p === 1) feed.innerHTML = "";
       feed.insertAdjacentHTML("beforeend", documents.map(renderDoc).join(""));
       loaded += documents.length;
-      document.getElementById("shown").textContent = total ? `Showing ${loaded.toLocaleString()} of ${total.toLocaleString()}` : `${loaded.toLocaleString()} loaded`;
+      document.getElementById("shown").textContent = total ? `Showing ${loaded.toLocaleString()} of ${total.toLocaleString()}` : "No matching headlines";
+      filterSummary.textContent = `${filtered_out.toLocaleString()} of ${total_unfiltered.toLocaleString()} headlines filtered out (${filtered_percentage}%)`;
       btn.hidden = !has_more; btn.disabled = false; btn.textContent = "Load more headlines";
     })
     .catch(() => { btn.disabled = false; btn.hidden = false; btn.textContent = "Couldn't load. Try again"; });
 }
+function refreshFeed() {
+  page = 1; loaded = 0; loadPage(1);
+}
+minStrength.addEventListener("input", () => {
+  minStrengthValue.value = `${minStrength.value}%`;
+  clearTimeout(refreshTimer);
+  refreshTimer = setTimeout(refreshFeed, 150);
+});
+headlineSort.addEventListener("change", refreshFeed);
+headlineSort.addEventListener("change", () => {
+  headlineOrder.disabled = headlineSort.value !== "strength";
+});
+headlineOrder.addEventListener("change", refreshFeed);
 btn.addEventListener("click", () => loadPage(++page));
 loadPage(1);
 </script>

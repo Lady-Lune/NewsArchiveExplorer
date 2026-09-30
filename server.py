@@ -43,24 +43,46 @@ async def api_topics():
 
 
 @app.get("/api/topics/{topic_id}/documents")
-async def api_documents(topic_id: int, page: int = 1, limit: int = 20):
+async def api_documents(
+    topic_id: int,
+    page: int = 1,
+    limit: int = 20,
+    min_probability: float = 0.0,
+    sort: str = "default",
+    order: str = "desc",
+):
     if not store.get_topic(topic_id):
         raise HTTPException(404, "Topic not found")
     limit = max(1, min(limit, 100))
     page = max(1, page)
-    docs = store.get_documents(topic_id)
+    min_probability = max(0.0, min(1.0, min_probability))
+    if sort not in ("default", "strength"):
+        raise HTTPException(400, "Sort must be 'default' or 'strength'")
+    if order not in ("asc", "desc"):
+        raise HTTPException(400, "Order must be 'asc' or 'desc'")
+    all_docs = store.get_documents(topic_id)
+    docs = [d for d in all_docs if d["probability"] >= min_probability]
+    if sort == "strength":
+        docs.sort(key=lambda d: d["probability"], reverse=order == "desc")
     start = (page - 1) * limit
     return {
         "documents": docs[start:start + limit],
         "total": len(docs),
+        "total_unfiltered": len(all_docs),
+        "filtered_out": len(all_docs) - len(docs),
+        "filtered_percentage": round((len(all_docs) - len(docs)) / len(all_docs) * 100, 1) if all_docs else 0,
         "page": page,
         "has_more": start + limit < len(docs),
     }
 
 
 @app.get("/api/topics/{topic_id}/time_frequency")
-async def api_time_frequency(topic_id: int):
-    return {"data": store.get_time_frequency(topic_id)}
+async def api_time_frequency(topic_id: int, granularity: str = "month"):
+    if not store.get_topic(topic_id):
+        raise HTTPException(404, "Topic not found")
+    if granularity not in ("day", "month"):
+        raise HTTPException(400, "Granularity must be 'day' or 'month'")
+    return {"data": store.get_time_frequency(topic_id, granularity)}
 
 
 @app.get("/api/metadata")

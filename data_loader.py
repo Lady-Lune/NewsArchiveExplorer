@@ -20,7 +20,7 @@ class DataStore:
     def __init__(self, data_dir: Path):
         self.data_dir = Path(data_dir)
         self._topics: Optional[list[dict]] = None
-        self._time_freq: Optional[dict[int, list[dict]]] = None
+        self._time_freq: dict[str, dict[int, list[dict]]] = {}
         self._doc_cache: dict[int, list[dict]] = {}
 
     # -- public ----------------------------------------------------------
@@ -34,10 +34,12 @@ class DataStore:
     def get_topic(self, topic_id: int) -> Optional[dict]:
         return next((t for t in self.topics if t["id"] == topic_id), None)
 
-    def get_time_frequency(self, topic_id: int) -> list[dict]:
-        if self._time_freq is None:
-            self._time_freq = self._load_time_frequency()
-        return self._time_freq.get(topic_id, [])
+    def get_time_frequency(self, topic_id: int, granularity: str = "month") -> list[dict]:
+        if granularity not in ("day", "month"):
+            granularity = "month"
+        if granularity not in self._time_freq:
+            self._time_freq[granularity] = self._load_time_frequency(granularity)
+        return self._time_freq[granularity].get(topic_id, [])
 
     def get_documents(self, topic_id: int) -> list[dict]:
         if topic_id not in self._doc_cache:
@@ -75,8 +77,9 @@ class DataStore:
         out.sort(key=lambda x: x["frequency"], reverse=True)
         return out
 
-    def _load_time_frequency(self) -> dict[int, list[dict]]:
-        raw = json.loads((self.data_dir / "dailytopicfreq.json").read_text(encoding="utf-8"))
+    def _load_time_frequency(self, granularity: str) -> dict[int, list[dict]]:
+        filename = "dailytopicfreq.json" if granularity == "day" else "monthlytopicfreq.json"
+        raw = json.loads((self.data_dir / filename).read_text(encoding="utf-8"))
         grouped: dict[int, list[dict]] = {}
         for r in raw:
             tid = r.get("topic_id")
