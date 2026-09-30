@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.display_name }}{% endblock %}
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2/dist/echarts-wordcloud.min.js"></script>
+{% endblock %}
+{% block css %}
+.back{color:var(--mut);text-decoration:none;font-size:.9rem}
+.back:hover{color:var(--ink)}
+.top{padding:1.5rem 0 1rem;border-left:6px solid var(--a);padding-left:1.25rem;margin-top:1rem}
+.top h1{font-size:clamp(2.2rem,6vw,4rem)}
+.top p{margin:.6rem 0 0;max-width:60ch}
+.stats{display:flex;flex-wrap:wrap;gap:2.5rem;margin:1.5rem 0 .5rem}
+.stat b{display:block;font:700 2.2rem var(--disp);color:var(--a)}
+.stat span{color:var(--mut);font-size:.9rem}
+.share{height:6px;background:var(--line);border-radius:3px;margin-top:.4rem;width:9rem;overflow:hidden}
+.share i{display:block;height:100%;background:var(--a);width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+section{margin-top:2.75rem}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.sh h2{font-size:1.5rem}
+#timeline{width:100%;height:340px}
+.two{display:grid;grid-template-columns:3fr 2fr;gap:2rem;align-items:center}
+#cloud{height:340px}
+.wl{list-style:none;margin:0;padding:0}
+.wl li{display:grid;grid-template-columns:6.5rem 1fr;gap:.75rem;align-items:center;padding:.3rem 0}
+.wl i{display:block;height:8px;border-radius:2px;background:var(--a);opacity:.85}
+.feed{border-top:1px solid var(--line)}
+.hl{padding:1rem 0;border-bottom:1px solid var(--line)}
+.hl a,.hl span.t{font:600 1.1rem/1.35 var(--disp);text-decoration:none}
+.hl a:hover{text-decoration:underline;text-decoration-color:var(--a);text-underline-offset:3px}
+.hl .m{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;margin-top:.35rem;color:var(--mut);font-size:.88rem;align-items:center}
+.meter{display:inline-flex;align-items:center;gap:.4rem}
+.meter i{width:44px;height:5px;background:var(--line);border-radius:3px;overflow:hidden}
+.meter i b{display:block;height:100%;background:var(--a)}
+.more{margin:1.5rem 0 0;display:flex;gap:1rem;align-items:center}
+.more button{cursor:pointer;font:600 1rem var(--body);padding:.65rem 1.4rem;border-radius:var(--r);border:0;background:var(--a);color:var(--bg)}
+.more button:disabled{opacity:.55;cursor:wait}
+.sk{height:64px;margin:.8rem 0;border-radius:var(--r);background:linear-gradient(90deg,var(--line),var(--panel),var(--line));background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+{% endblock %}
+{% block content %}
+<div class="acc{{ ' out' if topic.id < 0 }}" id="root" style="--h:{{ (topic.id * 47) % 360 }}">
+<a class="back" href="/">← All topics</a>
+
+<header class="top">
+  <h1>{{ topic.display_name }}</h1>
+  <p class="mut">Topic {{ topic.id if topic.id >= 0 else '(unassigned)' }}. Defined by the words {{ topic.representation[:5] | join(", ") }}.</p>
+  <div class="stats">
+    <div class="stat"><b data-count="{{ topic.frequency }}">{{ "{:,}".format(topic.frequency) }}</b><span>headlines</span></div>
+    <div class="stat"><b>{{ '%.1f'|format(topic.percentage) }}%</b><span>of the whole corpus</span>
+      <div class="share"><i data-w="{{ topic.percentage }}"></i></div></div>
+  </div>
+</header>
+
+<section>
+  <div class="sh"><h2>How often it appears</h2>
+    <div class="seg" id="gran" role="group" aria-label="Time grouping">
+      <button aria-pressed="true" data-g="month">By month</button>
+      <button aria-pressed="false" data-g="year">By year</button>
+    </div></div>
+  <div id="timeline" role="img" aria-label="Headlines per period for this topic"></div>
+  <p class="mut" style="margin:.25rem 0 0;font-size:.88rem">Drag the handles under the chart to zoom into a period.</p>
+</section>
+
+<section>
+  <div class="sh"><h2>Words that define it</h2></div>
+  <div class="two">
+    <div id="cloud" role="img" aria-label="Word cloud of this topic's words"></div>
+    <ol class="wl" id="wl"></ol>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><h2>Headlines</h2><span class="mut" id="shown"></span></div>
+  <div id="feed" class="feed"></div>
+  <div class="more"><button id="more" hidden>Load more headlines</button></div>
+</section>
+</div>
+
+<script>
+const TOPIC_ID = {{ topic.id }}, LIMIT = 20;
+const root = document.getElementById("root");
+const cs = getComputedStyle(root);
+const ACC = () => cs.getPropertyValue("--a").trim();
+const MUT = () => cs.getPropertyValue("--mut").trim() || "#888";
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+// ---- Stats motion (runs once) --------------------------------------
+document.querySelector(".share i").style.width = Math.min(100, document.querySelector(".share i").dataset.w) + "%";
+const cEl = document.querySelector("[data-count]"), target = +cEl.dataset.count, t0 = performance.now();
+(function tick(t) {
+  const p = Math.min(1, (t - t0) / 900);
+  cEl.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString();
+  if (p < 1) requestAnimationFrame(tick);
+})(t0);
+
+// ---- Timeline ------------------------------------------------------
+const chart = echarts.init(document.getElementById("timeline"));
+let raw = [], gran = "month";
+function build() {
+  const len = gran === "year" ? 4 : 7, acc = {};
+  raw.forEach(d => { const k = String(d.date).slice(0, len); acc[k] = (acc[k] || 0) + d.frequency; });
+  const keys = Object.keys(acc).sort(); if (!keys.length) return [];
+  const out = [], end = keys[keys.length - 1];
+  let [y, m] = keys[0].split("-").map(Number);
+  for (;;) {                                   // zero-fill gaps so the line does not skip quiet periods
+    const k = gran === "year" ? String(y) : `${y}-${String(m).padStart(2, "0")}`;
+    out.push([k, acc[k] || 0]);
+    if (k === end) break;
+    if (gran === "year") y++; else if (++m > 12) { m = 1; y++; }
+  }
+  return out;
+}
+function draw() {
+  const pts = build(), color = ACC();
+  const start = pts.find(p => p[0] >= "2010");   // a few stray 2007-09 rows would squash the chart; the slider still reaches them
+  chart.setOption({
+    grid: { left: 44, right: 16, top: 16, bottom: 64 },
+    tooltip: { trigger: "axis", valueFormatter: v => v.toLocaleString() + " headlines" },
+    xAxis: { type: "category", data: pts.map(p => p[0]), axisLabel: { color: MUT() }, boundaryGap: false },
+    yAxis: { type: "value", axisLabel: { color: MUT() }, splitLine: { lineStyle: { opacity: .25 } } },
+    dataZoom: [{ type: "inside" }, { type: "slider", height: 22, bottom: 8, startValue: start ? start[0] : undefined }],
+    series: [{ type: "line", data: pts.map(p => p[1]), smooth: .25, showSymbol: false,
+      lineStyle: { width: 2.5, color }, itemStyle: { color }, areaStyle: { color, opacity: .16 } }]
+  }, true);
+}
+document.querySelectorAll("#gran button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("#gran button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  gran = b.dataset.g; draw();
+}));
+fetch(`/api/topics/${TOPIC_ID}/time_frequency`).then(r => r.json()).then(({ data }) => { raw = data; draw(); });
+
+// ---- Words: cloud + ranked list -----------------------------------
+const words = ({{ topic.words | tojson }}).slice().sort((a, b) => b.weight - a.weight);
+if (words.length) {
+  const maxW = words[0].weight, h = cs.getPropertyValue("--h").trim();
+  document.getElementById("wl").innerHTML = words.slice(0, 10).map(w =>
+    `<li><span>${esc(w.word)}</span><i style="width:${(w.weight / maxW * 100).toFixed(0)}%"></i></li>`).join("");
+  const cloud = echarts.init(document.getElementById("cloud"));
+  cloud.setOption({
+    tooltip: { formatter: p => `${esc(p.name)}: ${p.value.toFixed(4)}` },
+    series: [{ type: "wordCloud", shape: "circle", sizeRange: [14, 60], rotationRange: [-25, 25], rotationStep: 25,
+      gridSize: 8, drawOutOfBound: false, width: "100%", height: "100%",
+      textStyle: { fontFamily: "Bricolage Grotesque, sans-serif", fontWeight: 600,
+        color: () => `hsl(${h} 65% ${45 + Math.random() * 20}%)` },
+      emphasis: { textStyle: { color: ACC() } },
+      data: words.map(w => ({ name: w.word, value: w.weight })) }]
+  });
+  addEventListener("resize", () => cloud.resize());
+}
+addEventListener("resize", () => chart.resize());
+
+// ---- Headlines feed ------------------------------------------------
+const fmtDate = d => {
+  if (d.date) { const t = new Date(d.date + "T00:00"); if (!isNaN(t)) return t.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }); return d.date; }
+  return [d.day, d.month, d.year].filter(Boolean).join(" ");
+};
+// Match strength lives in one function so it is easy to restyle later.
+const meter = p => `<span class="meter" title="Match strength ${p.toFixed(2)}"><i><b style="width:${Math.round(p * 100)}%;display:block"></b></i>${Math.round(p * 100)}%</span>`; //t's HDBSCAN membership strength, not a calibrated probability.
+function renderDoc(d) {
+  const title = esc(d.headline ?? d.text);
+  const head = d.url ? `<a href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">${title}</a>` : `<span class="t">${title}</span>`;
+  const time = d.time || d.published_time;
+  return `<article class="hl">${head}<div class="m"><span>${esc(fmtDate(d))}${time ? " at " + esc(time) : ""}</span>${d.category ? `<span title="Original Catagory">${esc(d.category)}</span>` : ""}${meter(+d.probability || 0)}</div></article>`;
+}
+const feed = document.getElementById("feed"), btn = document.getElementById("more");
+let page = 1, loaded = 0;
+function loadPage(p) {
+  btn.disabled = true; btn.textContent = "Loading…";
+  if (p === 1) feed.innerHTML = '<div class="sk"></div>'.repeat(4);
+  return fetch(`/api/topics/${TOPIC_ID}/documents?page=${p}&limit=${LIMIT}`).then(r => r.json())
+    .then(({ documents, has_more, total }) => {
+      if (p === 1) feed.innerHTML = "";
+      feed.insertAdjacentHTML("beforeend", documents.map(renderDoc).join(""));
+      loaded += documents.length;
+      document.getElementById("shown").textContent = total ? `Showing ${loaded.toLocaleString()} of ${total.toLocaleString()}` : `${loaded.toLocaleString()} loaded`;
+      btn.hidden = !has_more; btn.disabled = false; btn.textContent = "Load more headlines";
+    })
+    .catch(() => { btn.disabled = false; btn.hidden = false; btn.textContent = "Couldn't load. Try again"; });
+}
+btn.addEventListener("click", () => loadPage(++page));
+loadPage(1);
+</script>
+{% endblock %}

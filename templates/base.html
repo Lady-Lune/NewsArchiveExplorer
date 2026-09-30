@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}Topic Explorer{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5f7;--panel:#fff;--ink:#101828;--mut:#5b6675;--line:#d9dfe6;--r:6px;
+--disp:'Bricolage Grotesque',system-ui,sans-serif;--body:'Instrument Sans',system-ui,sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1420;--panel:#151d2c;--ink:#e8edf5;--mut:#93a0b4;--line:#243044}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--a,#3b6cf6);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.25rem}
+.acc{--a:hsl(var(--h) 68% 44%);--t:hsl(var(--h) 70% 92%)}
+.acc.out{--a:var(--mut);--t:var(--line)}
+@media(prefers-color-scheme:dark){.acc{--a:hsl(var(--h) 75% 68%);--t:hsl(var(--h) 40% 20%)}}
+h1,h2,h3{font-family:var(--disp);letter-spacing:-.02em;line-height:1.1;margin:0}
+.nav{padding:1.25rem 0;display:flex;justify-content:space-between;align-items:center}
+.brand{font:700 1.1rem var(--disp);text-decoration:none}
+.mut{color:var(--mut)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--panel)}
+.seg button{all:unset;cursor:pointer;padding:.35rem .8rem;font-size:.88rem;color:var(--mut)}
+.seg button[aria-pressed=true]{background:var(--a,var(--ink));color:var(--bg)}
+.seg button:focus-visible{outline:2px solid var(--a,#3b6cf6);outline-offset:-2px}
+footer{padding:3rem 0 2rem;color:var(--mut);font-size:.85rem}
+{% block css %}{% endblock %}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+{% block head %}{% endblock %}
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav"><a class="brand" href="/">{{ site_title|default("Topic Explorer") }}</a></nav>
+  {% block content %}{% endblock %}
+  <footer>Topics discovered with BERTopic.</footer>
+</div>
+</body>
+</html>

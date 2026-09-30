@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}All topics{% endblock %}
+{% block css %}
+.hero{padding:2.5rem 0 1.5rem}
+.hero h1{font-size:clamp(2.4rem,6vw,4.2rem);max-width:14ch}
+.hero p{margin:.9rem 0 0;max-width:52ch;font-size:1.05rem}
+.tools{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin:1.75rem 0 1rem}
+.tools input{flex:1;min-width:220px;padding:.6rem .9rem;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);color:var(--ink);font:inherit}
+.rows{border-top:1px solid var(--line)}
+.row{position:relative;display:grid;grid-template-columns:2.6rem 1fr auto;gap:1rem;align-items:center;padding:1rem .75rem;border-bottom:1px solid var(--line);text-decoration:none;overflow:hidden}
+.fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--t);transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.on .fill{width:var(--w)}
+.row>*:not(.fill){position:relative}
+.row:hover .nm b{text-decoration:underline;text-decoration-color:var(--a);text-underline-offset:4px}
+.id{font:700 1.3rem var(--disp);color:var(--a)}
+.nm b{display:block;font:600 1.15rem var(--disp)}
+.nm small{color:var(--mut)}
+.ct{text-align:right}
+.ct b{display:block;font:700 1.15rem var(--disp)}
+.ct small{color:var(--mut)}
+.none{padding:2rem 0}
+@media(max-width:560px){.ct small{display:none}}
+{% endblock %}
+{% block content %}
+{% set mx = topics|map(attribute='frequency')|max %}
+<header class="hero">
+  <h1>What {{ "{:,}".format(total_docs) }} headlines are about</h1>
+  <p class="mut">The model found {{ num_topics }} topics. Bar length shows each topic's share of the corpus. Select one to see how it changed over time.</p>
+  <div class="tools">
+    <input id="q" type="search" placeholder="Search topics or words (press / to focus)" aria-label="Search topics">
+    <div class="seg" role="group" aria-label="Sort topics">
+      <button aria-pressed="true" data-sort="f">Largest</button>
+      <button aria-pressed="false" data-sort="n">A–Z</button>
+      <button aria-pressed="false" data-sort="i">Topic number</button>
+    </div>
+  </div>
+  <div id="count" class="mut" aria-live="polite"></div>
+</header>
+
+<div id="grid" class="rows">
+  {% for t in topics %}
+  <a class="row acc{{ ' out' if t.id < 0 }}" href="/topic/{{ t.id }}"
+     style="--h:{{ (t.id * 47) % 360 }};--w:{{ '%.1f'|format(t.frequency / mx * 100) }}%"
+     data-s="{{ (t.display_name ~ ' ' ~ t.representation|join(' '))|lower }}"
+     data-n="{{ t.display_name|lower }}" data-f="{{ t.frequency }}" data-i="{{ t.id }}">
+    <span class="fill"></span>
+    <span class="id">{{ t.id if t.id >= 0 else '–' }}</span>
+    <span class="nm"><b>{{ t.display_name }}</b><small>{{ t.representation[:6] | join(", ") }}</small></span>
+    <span class="ct"><b>{{ "{:,}".format(t.frequency) }}</b><small>{{ '%.1f'|format(t.percentage) }}% of corpus</small></span>
+  </a>
+  {% endfor %}
+</div>
+<p id="none" class="none mut" hidden>No topic matches that search. Try a single word, like "cricket".</p>
+
+<script>
+const grid = document.getElementById("grid"), q = document.getElementById("q");
+const rows = [...grid.children];
+let sortKey = "f";
+function apply() {
+  const s = q.value.toLowerCase().trim();
+  let n = 0;
+  rows.forEach(r => { const ok = !s || r.dataset.s.includes(s); r.hidden = !ok; n += ok; });
+  document.getElementById("none").hidden = n > 0;
+  document.getElementById("count").textContent = `Showing ${n} of ${rows.length} topics`;
+}
+function sort() {
+  const num = sortKey !== "n";
+  const dir = sortKey === "f" ? -1 : 1;
+  rows.sort((a, b) => {
+    const x = a.dataset[sortKey], y = b.dataset[sortKey];
+    return dir * (num ? x - y : x.localeCompare(y));
+  }).forEach(r => grid.append(r));
+}
+document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  sortKey = b.dataset.sort; sort();
+}));
+q.addEventListener("input", apply);
+addEventListener("keydown", e => { if (e.key === "/" && document.activeElement !== q) { e.preventDefault(); q.focus(); } });
+apply();
+requestAnimationFrame(() => requestAnimationFrame(() => grid.classList.add("on")));
+</script>
+{% endblock %}

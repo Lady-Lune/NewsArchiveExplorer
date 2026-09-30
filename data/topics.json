@@ -1,0 +1,2048 @@
+[
+    {
+        "Topic": -1,
+        "Count": 9004,
+        "Name": "-1_court_minister_parliament_president",
+        "Custom Name" : "Court Orders, Legal Cases & Political Figures",
+        "Representation": [
+            "court",
+            "minister",
+            "parliament",
+            "president",
+            "police",
+            "general",
+            "government",
+            "colombo",
+            "said",
+            "commission"
+        ],
+        "Representative_Docs": [
+            "court order issued protest march scheduled police secured court order protest march scheduled held june",
+            "president ranil wickremesinghe remanded president ranil wickremesinghe arrested criminal investigation department cid remanded august colombo fort magistrate court",
+            "action cash president house bribery comm tells court commission investigate allegations bribery corruption ciaboc wednesday oct informed colombo fort magistrate court action taken relation rs million cash president gotabaya rajapaksa official room president house colombo"
+        ],
+        "word_weight": [
+            [
+                "court",
+                0.0332938524
+            ],
+            [
+                "minister",
+                0.0271568954
+            ],
+            [
+                "parliament",
+                0.0222115533
+            ],
+            [
+                "president",
+                0.022012819
+            ],
+            [
+                "police",
+                0.0202919729
+            ],
+            [
+                "general",
+                0.0186538904
+            ],
+            [
+                "government",
+                0.0174702456
+            ],
+            [
+                "colombo",
+                0.0174516595
+            ],
+            [
+                "said",
+                0.0171980317
+            ],
+            [
+                "commission",
+                0.0169579237
+            ]
+        ],
+        "perc": 7.3529651951
+    },
+    {
+        "Topic": 0,
+        "Count": 28615,
+        "Name": "0_president_minister_government_rajapaksa",
+        "Custom Name" : "Sri Lankan Politics: Presidents, Ministers & Parties",
+        "Representation": [
+            "president",
+            "minister",
+            "government",
+            "rajapaksa",
+            "national",
+            "said",
+            "party",
+            "ranil",
+            "mahinda",
+            "court"
+        ],
+        "Representative_Docs": [
+            "ranil gazetted unp national list mp election commission gazetted united national party unp leader ranil wickremesinghe party national list member parliament",
+            "pm announce presidential candidate week prime minister ranil wickremesinghe stated presidential candidate united national party unp presidential election declared upcoming week",
+            "hold meetings president mahinda president mahinda rajapaksa stated held discussions incumbent president maithripala sirisena sunday september"
+        ],
+        "word_weight": [
+            [
+                "president",
+                0.0430704199
+            ],
+            [
+                "minister",
+                0.0340294671
+            ],
+            [
+                "government",
+                0.0231648034
+            ],
+            [
+                "rajapaksa",
+                0.0215391939
+            ],
+            [
+                "national",
+                0.0186145146
+            ],
+            [
+                "said",
+                0.0184914628
+            ],
+            [
+                "party",
+                0.0177885133
+            ],
+            [
+                "ranil",
+                0.0167541284
+            ],
+            [
+                "mahinda",
+                0.0166609004
+            ],
+            [
+                "court",
+                0.0163471545
+            ]
+        ],
+        "perc": 23.3679585804
+    },
+    {
+        "Topic": 1,
+        "Count": 9991,
+        "Name": "1_cricket_cup_world_test",
+        "Custom Name" : "Cricket: World Cups, Matches & Tournaments",
+        "Representation": [
+            "cricket",
+            "cup",
+            "world",
+            "test",
+            "match",
+            "icc",
+            "series",
+            "pakistan",
+            "odi",
+            "win"
+        ],
+        "Representative_Docs": [
+            "squad named world cup cricket selection committee selected member squad upcoming icc men world cup cricket slc said",
+            "cricket squad leaves england national cricket team left england morning icc cricket world cup",
+            "australia win icc women cricket world cup australia won seventh icc women cricket world cup run victory england christchurch"
+        ],
+        "word_weight": [
+            [
+                "cricket",
+                0.066556975
+            ],
+            [
+                "cup",
+                0.053737598
+            ],
+            [
+                "world",
+                0.0456678223
+            ],
+            [
+                "test",
+                0.0410239925
+            ],
+            [
+                "match",
+                0.0394901643
+            ],
+            [
+                "icc",
+                0.034753366
+            ],
+            [
+                "series",
+                0.0346509344
+            ],
+            [
+                "pakistan",
+                0.0301803599
+            ],
+            [
+                "odi",
+                0.0297977297
+            ],
+            [
+                "win",
+                0.0296248222
+            ]
+        ],
+        "perc": 8.1589821484
+    },
+    {
+        "Topic": 2,
+        "Count": 10522,
+        "Name": "2_covid_coronavirus_health_positive",
+        "Custom Name" : "COVID-19 & Coronavirus Health Updates",
+        "Representation": [
+            "covid",
+            "coronavirus",
+            "health",
+            "positive",
+            "tested",
+            "confirmed",
+            "ministry",
+            "total",
+            "patients",
+            "virus"
+        ],
+        "Representative_Docs": [
+            "coronavirus confirmed ministry health persons tested positive coronavirus increasing tally covid",
+            "test positive covid tally covid individuals tested covid positive ministry health confirmed",
+            "coronavirus reported health ministry persons tested positive covid"
+        ],
+        "word_weight": [
+            [
+                "covid",
+                0.1506074419
+            ],
+            [
+                "coronavirus",
+                0.084965442
+            ],
+            [
+                "health",
+                0.0791118543
+            ],
+            [
+                "positive",
+                0.0711058115
+            ],
+            [
+                "tested",
+                0.052376815
+            ],
+            [
+                "confirmed",
+                0.0517090872
+            ],
+            [
+                "ministry",
+                0.0441266853
+            ],
+            [
+                "total",
+                0.0421426762
+            ],
+            [
+                "patients",
+                0.0414458513
+            ],
+            [
+                "virus",
+                0.0381585464
+            ]
+        ],
+        "perc": 8.5926143695
+    },
+    {
+        "Topic": 3,
+        "Count": 6290,
+        "Name": "3_showers_meteorology_department_provinces",
+        "Custom Name" : "Weather Forecasts: Showers & Meteorology",
+        "Representation": [
+            "showers",
+            "meteorology",
+            "department",
+            "provinces",
+            "expected",
+            "western",
+            "districts",
+            "thundershowers",
+            "occur",
+            "heavy"
+        ],
+        "Representative_Docs": [
+            "fairly heavy showers expected parts island department meteorology showers thundershowers occur times western sabaragamuwa north western provinces galle matara kandy nuwara eliya districts",
+            "showers expected parts island meteorology department showers thundershowers occur places western sabaragamuwa central provinces galle matara districts",
+            "fairly heavy showers expected parts island meteorology department showers thundershowers occur places western sabaragamuwa central north western provinces galle matara districts"
+        ],
+        "word_weight": [
+            [
+                "showers",
+                0.0948929807
+            ],
+            [
+                "meteorology",
+                0.0906572426
+            ],
+            [
+                "department",
+                0.0794030407
+            ],
+            [
+                "provinces",
+                0.0767663086
+            ],
+            [
+                "expected",
+                0.0753766522
+            ],
+            [
+                "western",
+                0.0620824705
+            ],
+            [
+                "districts",
+                0.0601922444
+            ],
+            [
+                "thundershowers",
+                0.0565376426
+            ],
+            [
+                "occur",
+                0.0564709508
+            ],
+            [
+                "heavy",
+                0.0542725914
+            ]
+        ],
+        "perc": 5.1366227318
+    },
+    {
+        "Topic": 4,
+        "Count": 13198,
+        "Name": "4_arrested_police_rs_heroin",
+        "Custom Name" : "Arrests, Smuggling & Drug Seizures",
+        "Representation": [
+            "arrested",
+            "police",
+            "rs",
+            "heroin",
+            "suspects",
+            "suspect",
+            "worth",
+            "court",
+            "possession",
+            "remanded"
+        ],
+        "Representative_Docs": [
+            "retired customs officer arrested bia gold worth rs retired customs inspector arrested bandaranaike international airport bia katunayake gold jewellery worth rs million",
+            "suspect arrested bia foreign cigarettes worth rs mln suspect arrested customs officials bandaranaike international airport bia attempting smuggle consignment foreign cigarettes electronic cigarettes valued rs million country",
+            "indian held bia gold worth rs million indian national arrested bandaranaike international airport katunayake gold worth rs million"
+        ],
+        "word_weight": [
+            [
+                "arrested",
+                0.0834194379
+            ],
+            [
+                "police",
+                0.0516954116
+            ],
+            [
+                "rs",
+                0.0250330377
+            ],
+            [
+                "heroin",
+                0.0231831775
+            ],
+            [
+                "suspects",
+                0.0229062924
+            ],
+            [
+                "suspect",
+                0.0213641963
+            ],
+            [
+                "worth",
+                0.0201173119
+            ],
+            [
+                "court",
+                0.0190825678
+            ],
+            [
+                "possession",
+                0.01820085
+            ],
+            [
+                "remanded",
+                0.0179663937
+            ]
+        ],
+        "perc": 10.7779247718
+    },
+    {
+        "Topic": 5,
+        "Count": 8680,
+        "Name": "5_killed_injured_police_road",
+        "Custom Name" : "Accidents, Shootings & Road Fatalities",
+        "Representation": [
+            "killed",
+            "injured",
+            "police",
+            "road",
+            "shooting",
+            "area",
+            "dead",
+            "accident",
+            "old",
+            "bus"
+        ],
+        "Representative_Docs": [
+            "dead wheeler collides bus persons killed following traffic collision involving wheeler bus eheliyagoda ratnapura colombo main road morning police said",
+            "update killed injured bus collision persons killed injured kiribathkumbura peradeniya buses collided kandy colombo main road july police stated",
+            "killed injured matale accident persons including women killed injured speeding van veered road fell precipice afternoon police said"
+        ],
+        "word_weight": [
+            [
+                "killed",
+                0.0547357275
+            ],
+            [
+                "injured",
+                0.0545339546
+            ],
+            [
+                "police",
+                0.0530784858
+            ],
+            [
+                "road",
+                0.0439072653
+            ],
+            [
+                "shooting",
+                0.0389433998
+            ],
+            [
+                "area",
+                0.0349379715
+            ],
+            [
+                "dead",
+                0.0340637189
+            ],
+            [
+                "accident",
+                0.0338661848
+            ],
+            [
+                "old",
+                0.0307046371
+            ],
+            [
+                "bus",
+                0.0293576964
+            ]
+        ],
+        "perc": 7.0883760432
+    },
+    {
+        "Topic": 6,
+        "Count": 3547,
+        "Name": "6_strike_railway_train_bus",
+        "Custom Name" : "Railway Strikes & Transport Unions",
+        "Representation": [
+            "strike",
+            "railway",
+            "train",
+            "bus",
+            "trade",
+            "transport",
+            "line",
+            "union",
+            "services",
+            "unions"
+        ],
+        "Representative_Docs": [
+            "strike launched railway trade unions day nearly week long railway strike came end group railway trade unions launched strike action morning",
+            "railway strike called railway trade unions decided strike launched effect midnight",
+            "railway strike called railway trade unions decided planned strike action discussion ministry transport"
+        ],
+        "word_weight": [
+            [
+                "strike",
+                0.0956649524
+            ],
+            [
+                "railway",
+                0.0732957557
+            ],
+            [
+                "train",
+                0.0661075982
+            ],
+            [
+                "bus",
+                0.0551191707
+            ],
+            [
+                "trade",
+                0.0513291761
+            ],
+            [
+                "transport",
+                0.0427480343
+            ],
+            [
+                "line",
+                0.0423298311
+            ],
+            [
+                "union",
+                0.0416190852
+            ],
+            [
+                "services",
+                0.0398635588
+            ],
+            [
+                "unions",
+                0.0378437272
+            ]
+        ],
+        "perc": 2.8965979062
+    },
+    {
+        "Topic": 7,
+        "Count": 4009,
+        "Name": "7_power_fuel_electricity_gas",
+        "Custom Name" : "Power, Fuel & Electricity Crisis",
+        "Representation": [
+            "power",
+            "fuel",
+            "electricity",
+            "gas",
+            "energy",
+            "ceylon",
+            "prices",
+            "ceb",
+            "petroleum",
+            "price"
+        ],
+        "Representative_Docs": [
+            "power cuts reduce considerably days come pucsl public utilities commission pucsl secretaries energy power ministries informed sufficient fuel provided ceylon electricity board ceb power generation purposes",
+            "power cuts ceylon electricity board ceb announced power cuts dec",
+            "extended power cuts likely electricity tariffs increased minister power energy kanchana wijesekera warned event electricity tariffs increased requirements listed ceylon electricity board ceb extended power cuts imposed"
+        ],
+        "word_weight": [
+            [
+                "power",
+                0.0753927491
+            ],
+            [
+                "fuel",
+                0.0686202985
+            ],
+            [
+                "electricity",
+                0.0638086356
+            ],
+            [
+                "gas",
+                0.0505640022
+            ],
+            [
+                "energy",
+                0.0500976158
+            ],
+            [
+                "ceylon",
+                0.0477333945
+            ],
+            [
+                "prices",
+                0.0459188117
+            ],
+            [
+                "ceb",
+                0.0425204675
+            ],
+            [
+                "petroleum",
+                0.0402093146
+            ],
+            [
+                "price",
+                0.0337106108
+            ]
+        ],
+        "perc": 3.2738824375
+    },
+    {
+        "Topic": 8,
+        "Count": 3007,
+        "Name": "8_fishermen_indian_navy_fishing",
+        "Custom Name" : "Fishermen & Maritime Arrests",
+        "Representation": [
+            "fishermen",
+            "indian",
+            "navy",
+            "fishing",
+            "waters",
+            "nadu",
+            "coast",
+            "sea",
+            "boat",
+            "tamil"
+        ],
+        "Representative_Docs": [
+            "fishermen held fishing indian waters fishermen saturday arrested fishing indian waters indian coast guard officials said",
+            "fishermen arrested fishing indian waters fishermen thursday arrested allegedly fishing indian territorial waters indian navy",
+            "fishermen released indian authorities released fishermen apprehended fishing indian waters fishermen handed navy early morning"
+        ],
+        "word_weight": [
+            [
+                "fishermen",
+                0.1617993342
+            ],
+            [
+                "indian",
+                0.0931958281
+            ],
+            [
+                "navy",
+                0.0846362649
+            ],
+            [
+                "fishing",
+                0.0706274089
+            ],
+            [
+                "waters",
+                0.0518955563
+            ],
+            [
+                "nadu",
+                0.0405950023
+            ],
+            [
+                "coast",
+                0.0378628777
+            ],
+            [
+                "sea",
+                0.0370155741
+            ],
+            [
+                "boat",
+                0.0368377028
+            ],
+            [
+                "tamil",
+                0.0340734336
+            ]
+        ],
+        "perc": 2.4556159864
+    },
+    {
+        "Topic": 9,
+        "Count": 2875,
+        "Name": "9_election_elections_local_lg",
+        "Custom Name" : "Elections & Voting (Local & Presidential)",
+        "Representation": [
+            "election",
+            "elections",
+            "local",
+            "lg",
+            "commission",
+            "polls",
+            "votes",
+            "polling",
+            "postal",
+            "presidential"
+        ],
+        "Representative_Docs": [
+            "postal voting local govt election postponed postal voting local government election postponed notice election commission announced",
+            "candidates contesting lg election candidates registered political parties independent groups contest upcoming local government lg election election commission stated",
+            "postal voting presidential election allowed election commission postal voting presidential election carried"
+        ],
+        "word_weight": [
+            [
+                "election",
+                0.1523262789
+            ],
+            [
+                "elections",
+                0.0828465016
+            ],
+            [
+                "local",
+                0.0466656238
+            ],
+            [
+                "lg",
+                0.0463658827
+            ],
+            [
+                "commission",
+                0.0458413896
+            ],
+            [
+                "polls",
+                0.0429773734
+            ],
+            [
+                "votes",
+                0.0408696226
+            ],
+            [
+                "polling",
+                0.0405823529
+            ],
+            [
+                "postal",
+                0.0386965626
+            ],
+            [
+                "presidential",
+                0.0378612153
+            ]
+        ],
+        "perc": 2.347820406
+    },
+    {
+        "Topic": 10,
+        "Count": 2621,
+        "Name": "10_facebook_apple_google_company",
+        "Custom Name" : "Social Media, Tech Companies & Outages",
+        "Representation": [
+            "facebook",
+            "apple",
+            "google",
+            "company",
+            "users",
+            "mobile",
+            "social",
+            "mobitel",
+            "app",
+            "whatsapp"
+        ],
+        "Representative_Docs": [
+            "samsung double ai mobile devices million units year samsung electronics plans double year number mobile devices galaxy ai features largely powered google gemini ceo said firm edge rivals global race artificial intelligence heats",
+            "meta facebook instagram users world meta owned social media platforms facebook instagram hundreds thousands users tuesday global outage going hour",
+            "meta facebook instagram users world meta owned social media platforms facebook instagram hundreds thousands users tuesday global outage going hour"
+        ],
+        "word_weight": [
+            [
+                "facebook",
+                0.0306554723
+            ],
+            [
+                "apple",
+                0.0292980103
+            ],
+            [
+                "google",
+                0.0275331075
+            ],
+            [
+                "company",
+                0.0267063887
+            ],
+            [
+                "users",
+                0.0235167294
+            ],
+            [
+                "mobile",
+                0.0214615713
+            ],
+            [
+                "social",
+                0.0211368126
+            ],
+            [
+                "mobitel",
+                0.0194247518
+            ],
+            [
+                "app",
+                0.0173904376
+            ],
+            [
+                "whatsapp",
+                0.0169501006
+            ]
+        ],
+        "perc": 2.1403955771
+    },
+    {
+        "Topic": 11,
+        "Count": 2514,
+        "Name": "11_iran_israel_trump_gaza",
+        "Custom Name" : "Iran-Israel Conflict & Middle East War",
+        "Representation": [
+            "iran",
+            "israel",
+            "trump",
+            "gaza",
+            "israeli",
+            "iranian",
+            "war",
+            "donald",
+            "hamas",
+            "ceasefire"
+        ],
+        "Representative_Docs": [
+            "trump hold nuclear talks iran week president donald trump said wednesday likely seek commitment iran end nuclear ambitions talks week credited strikes iran bringing swift end war israel tehran",
+            "people killed israeli strikes iran official people killed iran day air war israel based latest forensic data spokesperson iranian judiciary said monday according state media",
+            "netanyahu israel war iran going years israeli prime minister benjamin netanyahu said expected war iran going years conflict widened israel attacking iran backed hezbollah targets lebanon iran hitting gulf states host bases"
+        ],
+        "word_weight": [
+            [
+                "iran",
+                0.1154479912
+            ],
+            [
+                "israel",
+                0.0825826371
+            ],
+            [
+                "trump",
+                0.0575024593
+            ],
+            [
+                "gaza",
+                0.0567477046
+            ],
+            [
+                "israeli",
+                0.0514919915
+            ],
+            [
+                "iranian",
+                0.0430286974
+            ],
+            [
+                "war",
+                0.0377486024
+            ],
+            [
+                "donald",
+                0.0361623516
+            ],
+            [
+                "hamas",
+                0.0338072131
+            ],
+            [
+                "ceasefire",
+                0.0320521769
+            ]
+        ],
+        "perc": 2.0530158264
+    },
+    {
+        "Topic": 12,
+        "Count": 1828,
+        "Name": "12_film_awards_derana_award",
+        "Custom Name" : "Film Awards, Cinema & Entertainment",
+        "Representation": [
+            "film",
+            "awards",
+            "derana",
+            "award",
+            "best",
+            "star",
+            "tv",
+            "music",
+            "movie",
+            "year"
+        ],
+        "Representative_Docs": [
+            "ada derana wins best news channel sumathi awards ada derana news channel won best television current affairs news reporting award th sumathi awards ceremony held bmich colombo short ago",
+            "shah rukh khan wins national film award best actor decades years film industry bollywood superstar shah rukh khan srk finally received national film award best actor",
+            "winners sixth derana sunsilk film awards won best film award sixth derana sunsilk film awards held nelum pokuna theatre colombo night"
+        ],
+        "word_weight": [
+            [
+                "film",
+                0.0619256598
+            ],
+            [
+                "awards",
+                0.0599296162
+            ],
+            [
+                "derana",
+                0.0422244057
+            ],
+            [
+                "award",
+                0.035100454
+            ],
+            [
+                "best",
+                0.032336231
+            ],
+            [
+                "star",
+                0.0296461183
+            ],
+            [
+                "tv",
+                0.0281065549
+            ],
+            [
+                "music",
+                0.0248436732
+            ],
+            [
+                "movie",
+                0.0219693201
+            ],
+            [
+                "year",
+                0.0200205165
+            ]
+        ],
+        "perc": 1.4928054616
+    },
+    {
+        "Topic": 13,
+        "Count": 2229,
+        "Name": "13_schools_examination_education_exam",
+        "Custom Name" : "Schools, Examinations & Education",
+        "Representation": [
+            "schools",
+            "examination",
+            "education",
+            "exam",
+            "level",
+            "examinations",
+            "grade",
+            "scholarship",
+            "students",
+            "results"
+        ],
+        "Representative_Docs": [
+            "grade scholarship exam results released results grade scholarship examination released online department examinations announced short ago",
+            "scholarship exam results results grade scholarship examination released short ago stated department examinations",
+            "grade scholarship exam results released results grade scholarship examination released online department examinations said"
+        ],
+        "word_weight": [
+            [
+                "schools",
+                0.099610334
+            ],
+            [
+                "examination",
+                0.0872696022
+            ],
+            [
+                "education",
+                0.0796073133
+            ],
+            [
+                "exam",
+                0.0666579857
+            ],
+            [
+                "level",
+                0.062866556
+            ],
+            [
+                "examinations",
+                0.0609002431
+            ],
+            [
+                "grade",
+                0.057767741
+            ],
+            [
+                "scholarship",
+                0.0555291917
+            ],
+            [
+                "students",
+                0.0552074338
+            ],
+            [
+                "results",
+                0.053227788
+            ]
+        ],
+        "perc": 1.8202753687
+    },
+    {
+        "Topic": 14,
+        "Count": 1645,
+        "Name": "14_airlines_srilankan_flight_flights",
+        "Custom Name" : "SriLankan Airlines: Flights & Cancellations",
+        "Representation": [
+            "airlines",
+            "srilankan",
+            "flight",
+            "flights",
+            "airport",
+            "plane",
+            "air",
+            "aircraft",
+            "international",
+            "crash"
+        ],
+        "Representative_Docs": [
+            "srilankan airlines flights cancelled delayed srilankan airlines announced flights cancelled flights scheduled delayed unavoidable circumstances",
+            "srilankan flights delayed cancelled srilankan airlines flights scheduled leave bandaranaike international airport bia katunayake feb delayed cancelled national carrier said",
+            "srilankan airlines announcement cancelled flights srilankan airlines announced continued closure airspace certain parts middle east srilankan airlines flights scheduled operate cancelled"
+        ],
+        "word_weight": [
+            [
+                "airlines",
+                0.0860123985
+            ],
+            [
+                "srilankan",
+                0.0836113351
+            ],
+            [
+                "flight",
+                0.0734598173
+            ],
+            [
+                "flights",
+                0.0707236071
+            ],
+            [
+                "airport",
+                0.0681419644
+            ],
+            [
+                "plane",
+                0.0550329087
+            ],
+            [
+                "air",
+                0.0501491764
+            ],
+            [
+                "aircraft",
+                0.0348264913
+            ],
+            [
+                "international",
+                0.0318249531
+            ],
+            [
+                "crash",
+                0.029861548
+            ]
+        ],
+        "perc": 1.3433615888
+    },
+    {
+        "Topic": 15,
+        "Count": 1172,
+        "Name": "15_away_died_passes_dies",
+        "Custom Name" : "Obituaries: Veteran Actors & Celebrities",
+        "Representation": [
+            "away",
+            "died",
+            "passes",
+            "dies",
+            "age",
+            "passed",
+            "veteran",
+            "actor",
+            "aged",
+            "singer"
+        ],
+        "Representative_Docs": [
+            "veteran actor gamini hettiarachchi passes away veteran actor gamini hettiarachchi away passed earlier away age family sources told ada derana",
+            "veteran actor perera passes away veteran actor cinema theatre television perera passed away age",
+            "veteran actor jayawardena passes away veteran actor jayawardena passed away age"
+        ],
+        "word_weight": [
+            [
+                "away",
+                0.1436508891
+            ],
+            [
+                "died",
+                0.0880703121
+            ],
+            [
+                "passes",
+                0.0835300745
+            ],
+            [
+                "dies",
+                0.0812200243
+            ],
+            [
+                "age",
+                0.0804979101
+            ],
+            [
+                "passed",
+                0.0790774109
+            ],
+            [
+                "veteran",
+                0.0662673421
+            ],
+            [
+                "actor",
+                0.0495810964
+            ],
+            [
+                "aged",
+                0.0468455117
+            ],
+            [
+                "singer",
+                0.0389258664
+            ]
+        ],
+        "perc": 0.9570940925
+    },
+    {
+        "Topic": 16,
+        "Count": 899,
+        "Name": "16_water_cut_supply_hour",
+        "Custom Name" : "Water Supply Cuts & NWSDB Announcements",
+        "Representation": [
+            "water",
+            "cut",
+            "supply",
+            "hour",
+            "drainage",
+            "areas",
+            "board",
+            "nwsdb",
+            "colombo",
+            "national"
+        ],
+        "Representative_Docs": [
+            "hour water cut parts colombo national water supply drainage board announced hour water cut imposed areas colombo",
+            "hour water cut parts colombo national water supply drainage board announced hour water cut imposed areas colombo",
+            "hour water cut water supply limited areas colombo national water supply drainage board nwsdb"
+        ],
+        "word_weight": [
+            [
+                "water",
+                0.3909503614
+            ],
+            [
+                "cut",
+                0.2096947499
+            ],
+            [
+                "supply",
+                0.200360716
+            ],
+            [
+                "hour",
+                0.1682256392
+            ],
+            [
+                "drainage",
+                0.1473782078
+            ],
+            [
+                "areas",
+                0.1252070245
+            ],
+            [
+                "board",
+                0.114447539
+            ],
+            [
+                "nwsdb",
+                0.0867973309
+            ],
+            [
+                "colombo",
+                0.0709647415
+            ],
+            [
+                "national",
+                0.0680218552
+            ]
+        ],
+        "perc": 0.7341532331
+    },
+    {
+        "Topic": 17,
+        "Count": 812,
+        "Name": "17_league_manchester_champions_barcelona",
+        "Custom Name" : "Football: Leagues, Champions & Clubs",
+        "Representation": [
+            "league",
+            "manchester",
+            "champions",
+            "barcelona",
+            "messi",
+            "win",
+            "madrid",
+            "cup",
+            "title",
+            "club"
+        ],
+        "Representative_Docs": [
+            "manchester city win premier league title arsenal lose manchester city confirmed premier league champions fifth time seasons saturday having kick ball second placed arsenal challenge ended defeat away nottingham forest",
+            "liverpool crowned premier league champions years thirty years hurt came end liverpool confirmed premier league champions courtesy second placed manchester city defeat chelsea",
+            "barcelona beats chelsea win women champions league final barcelona brilliant display beat chelsea win women champions league final time club history sunday"
+        ],
+        "word_weight": [
+            [
+                "league",
+                0.0679884898
+            ],
+            [
+                "manchester",
+                0.0580866697
+            ],
+            [
+                "champions",
+                0.0459423851
+            ],
+            [
+                "barcelona",
+                0.0458274027
+            ],
+            [
+                "messi",
+                0.0447869358
+            ],
+            [
+                "win",
+                0.0437463533
+            ],
+            [
+                "madrid",
+                0.0426061224
+            ],
+            [
+                "cup",
+                0.042031166
+            ],
+            [
+                "title",
+                0.0393996439
+            ],
+            [
+                "club",
+                0.039061975
+            ]
+        ],
+        "perc": 0.663106146
+    },
+    {
+        "Topic": 18,
+        "Count": 658,
+        "Name": "18_elephant_elephants_wild_wildlife",
+        "Custom Name" : "Wild Elephants & Human-Wildlife Conflict",
+        "Representation": [
+            "elephant",
+            "elephants",
+            "wild",
+            "wildlife",
+            "forest",
+            "zoo",
+            "animal",
+            "reserve",
+            "leopard",
+            "killed"
+        ],
+        "Representative_Docs": [
+            "killed wild elephant attack individual trampled death wild elephant galgamuwa",
+            "human elephant conflict kills wild elephants years ministry wildlife forest resources conservation human elephant conflicts increased past years",
+            "wildlife officer killed wild elephant attack wildlife officer reportedly died attacked wild elephants"
+        ],
+        "word_weight": [
+            [
+                "elephant",
+                0.1617981211
+            ],
+            [
+                "elephants",
+                0.0912664182
+            ],
+            [
+                "wild",
+                0.0903051614
+            ],
+            [
+                "wildlife",
+                0.0656444289
+            ],
+            [
+                "forest",
+                0.034712965
+            ],
+            [
+                "zoo",
+                0.0326882115
+            ],
+            [
+                "animal",
+                0.0316476541
+            ],
+            [
+                "reserve",
+                0.0284082583
+            ],
+            [
+                "leopard",
+                0.0281109593
+            ],
+            [
+                "killed",
+                0.0259793797
+            ]
+        ],
+        "perc": 0.5373446355
+    },
+    {
+        "Topic": 19,
+        "Count": 781,
+        "Name": "19_ukraine_russia_russian_trump",
+        "Custom Name" : "Ukraine-Russia War & Trump-Putin Diplomacy",
+        "Representation": [
+            "ukraine",
+            "russia",
+            "russian",
+            "trump",
+            "putin",
+            "ukrainian",
+            "vladimir",
+            "president",
+            "donald",
+            "moscow"
+        ],
+        "Representative_Docs": [
+            "putin thinks russia ukraine war coming end russian president vladimir putin said saturday thought ukraine war coming end remarks came hours vowed victory ukraine moscow scaled victory day parade years",
+            "putin russia ready compromise trump ukraine war russian president vladimir putin said thursday ready compromise ukraine possible talks president elect donald trump ending war conditions starting talks ukrainian authorities",
+            "putin trump russia ukraine start immediate talks ceasefire president donald trump said monday russia ukraine immediately start negotiations ceasefire end year old war speaking held russia president vladimir putin"
+        ],
+        "word_weight": [
+            [
+                "ukraine",
+                0.1436090642
+            ],
+            [
+                "russia",
+                0.1339879066
+            ],
+            [
+                "russian",
+                0.1076715296
+            ],
+            [
+                "trump",
+                0.0721858881
+            ],
+            [
+                "putin",
+                0.072027362
+            ],
+            [
+                "ukrainian",
+                0.045032175
+            ],
+            [
+                "vladimir",
+                0.0434822036
+            ],
+            [
+                "president",
+                0.0424253342
+            ],
+            [
+                "donald",
+                0.0421382907
+            ],
+            [
+                "moscow",
+                0.037998016
+            ]
+        ],
+        "perc": 0.6377905173
+    },
+    {
+        "Topic": 20,
+        "Count": 718,
+        "Name": "20_cse_index_stock_price",
+        "Custom Name" : "Colombo Stock Exchange & Financial Markets",
+        "Representation": [
+            "cse",
+            "index",
+            "stock",
+            "price",
+            "exchange",
+            "aspi",
+            "rupee",
+            "inflation",
+            "dollar",
+            "points"
+        ],
+        "Representative_Docs": [
+            "cse aspi crosses points time share price index aspi colombo stock exchange cse surpassed points mark time history",
+            "cse aspi crosses points time share price index aspi colombo stock exchange cse surpassed points mark time history",
+            "cse aspi crosses points share price index aspi colombo stock exchange cse crossed points mark time"
+        ],
+        "word_weight": [
+            [
+                "cse",
+                0.1077430908
+            ],
+            [
+                "index",
+                0.0999545919
+            ],
+            [
+                "stock",
+                0.0980471747
+            ],
+            [
+                "price",
+                0.0943095823
+            ],
+            [
+                "exchange",
+                0.0900037899
+            ],
+            [
+                "aspi",
+                0.0879127031
+            ],
+            [
+                "rupee",
+                0.0752803759
+            ],
+            [
+                "inflation",
+                0.0710745446
+            ],
+            [
+                "dollar",
+                0.064748641
+            ],
+            [
+                "points",
+                0.0606806243
+            ]
+        ],
+        "perc": 0.5863426266
+    },
+    {
+        "Topic": 21,
+        "Count": 930,
+        "Name": "21_tourism_tourists_tourist_arrivals",
+        "Custom Name" : "Tourism, Tourist Arrivals & Remittances",
+        "Representation": [
+            "tourism",
+            "tourists",
+            "tourist",
+            "arrivals",
+            "year",
+            "sltda",
+            "million",
+            "remittances",
+            "authority",
+            "development"
+        ],
+        "Representative_Docs": [
+            "tourist arrivals total tourists arrived country far data tourism development authority sltda shows",
+            "tourist arrivals total tourists arrived country far data tourism development authority sltda shows",
+            "tourist arrivals total tourists arrived country far data tourism development authority sltda shows"
+        ],
+        "word_weight": [
+            [
+                "tourism",
+                0.0942529547
+            ],
+            [
+                "tourists",
+                0.0777367246
+            ],
+            [
+                "tourist",
+                0.0727470253
+            ],
+            [
+                "arrivals",
+                0.0663459041
+            ],
+            [
+                "year",
+                0.0417156496
+            ],
+            [
+                "sltda",
+                0.0346803521
+            ],
+            [
+                "million",
+                0.0298781331
+            ],
+            [
+                "remittances",
+                0.0285608797
+            ],
+            [
+                "authority",
+                0.028434343
+            ],
+            [
+                "development",
+                0.0278192547
+            ]
+        ],
+        "perc": 0.7594688618
+    },
+    {
+        "Topic": 22,
+        "Count": 297,
+        "Name": "22_dengue_mosquito_control_health",
+        "Custom Name" : "Dengue Outbreaks & Mosquito Control",
+        "Representation": [
+            "dengue",
+            "mosquito",
+            "control",
+            "health",
+            "breeding",
+            "unit",
+            "ndcu",
+            "reported",
+            "fever",
+            "far"
+        ],
+        "Representative_Docs": [
+            "dengue deaths year total dengue reported parts country month dengue deaths health ministry",
+            "dengue months ministry health dengue reported island far year",
+            "dengue reported far national dengue control unit ndcu total dengue reported far"
+        ],
+        "word_weight": [
+            [
+                "dengue",
+                0.4417090015
+            ],
+            [
+                "mosquito",
+                0.0815741752
+            ],
+            [
+                "control",
+                0.0765260529
+            ],
+            [
+                "health",
+                0.0630343421
+            ],
+            [
+                "breeding",
+                0.0537329988
+            ],
+            [
+                "unit",
+                0.0532262821
+            ],
+            [
+                "ndcu",
+                0.0506865229
+            ],
+            [
+                "reported",
+                0.0497292554
+            ],
+            [
+                "fever",
+                0.0407513551
+            ],
+            [
+                "far",
+                0.0399705338
+            ]
+        ],
+        "perc": 0.2425400559
+    },
+    {
+        "Topic": 23,
+        "Count": 779,
+        "Name": "23_saudi_maid_arabia_kuwait",
+        "Custom Name" : "Foreign Employment Conflicts",
+        "Representation": [
+            "saudi",
+            "maid",
+            "arabia",
+            "kuwait",
+            "woman",
+            "housemaid",
+            "embassy",
+            "workers",
+            "maids",
+            "uae"
+        ],
+        "Representative_Docs": [
+            "maid tortured nails investigation begins foreign employment bureau extensive investigation carried torturing maid saudi arabia maid returned nails inserted body",
+            "maid killed saudi police confirm arar police said monday death maid al jouf saudi january case suicide embassy confirmed",
+            "indonesia pressures saudi arabia alleged maid abuse indonesia government continuing demand justice case indonesian maid allegedly abused employers saudi arabia government called saudi ambassador matter"
+        ],
+        "word_weight": [
+            [
+                "saudi",
+                0.1140427373
+            ],
+            [
+                "maid",
+                0.0771596112
+            ],
+            [
+                "arabia",
+                0.0637697375
+            ],
+            [
+                "kuwait",
+                0.0613979947
+            ],
+            [
+                "woman",
+                0.0357541655
+            ],
+            [
+                "housemaid",
+                0.03465981
+            ],
+            [
+                "embassy",
+                0.0318299094
+            ],
+            [
+                "workers",
+                0.0311230116
+            ],
+            [
+                "maids",
+                0.0250935843
+            ],
+            [
+                "uae",
+                0.0236184012
+            ]
+        ],
+        "perc": 0.6361572509
+    },
+    {
+        "Topic": 24,
+        "Count": 1567,
+        "Name": "24_health_rice_food_fertilizer",
+        "Custom Name" : "Agriculture, Rice, Fertilizer & Food",
+        "Representation": [
+            "health",
+            "rice",
+            "food",
+            "fertilizer",
+            "paddy",
+            "agriculture",
+            "minister",
+            "hospital",
+            "price",
+            "farmers"
+        ],
+        "Representative_Docs": [
+            "fao delivers tonnes urea fertilizer smallholder paddy farmers funding european union eu shipment tonnes urea fertilizer procured food agriculture organization united nations fao handed ministry agriculture distribution smallholder paddy farmers paddy seed farmers",
+            "paddy prices increased upcoming season dy agriculture minister steps taken increase price paddy starting upcoming season deputy minister agriculture namal karunaratne stated",
+            "govt purchase paddy farmers competitive prices cabinet ministers given approval purchase paddy local farmers competitive prices private sector rice purchasing program maha season"
+        ],
+        "word_weight": [
+            [
+                "health",
+                0.0615101771
+            ],
+            [
+                "rice",
+                0.0564607053
+            ],
+            [
+                "food",
+                0.0529581839
+            ],
+            [
+                "fertilizer",
+                0.0475723725
+            ],
+            [
+                "paddy",
+                0.0428822263
+            ],
+            [
+                "agriculture",
+                0.0370937094
+            ],
+            [
+                "minister",
+                0.0366204953
+            ],
+            [
+                "hospital",
+                0.0337338635
+            ],
+            [
+                "price",
+                0.0334375592
+            ],
+            [
+                "farmers",
+                0.0331001286
+            ]
+        ],
+        "perc": 1.2796642004
+    },
+    {
+        "Topic": 25,
+        "Count": 1224,
+        "Name": "25_protest_traffic_road_university",
+        "Custom Name" : "Protests, Traffic Blockades & University Students",
+        "Representation": [
+            "protest",
+            "traffic",
+            "road",
+            "university",
+            "students",
+            "colombo",
+            "blocked",
+            "march",
+            "staged",
+            "near"
+        ],
+        "Representative_Docs": [
+            "parliament road closed protest parliament road temporarily closed traffic protest march university students",
+            "heavy traffic kandy road protest march students heavy traffic reported kandy road near kelaniya university protest march university students heading colombo",
+            "heavy traffic protest colombo fort severe traffic congestion reported colombo fort area lotus road closed protest ada derana reporter said"
+        ],
+        "word_weight": [
+            [
+                "protest",
+                0.2125501278
+            ],
+            [
+                "traffic",
+                0.0805831366
+            ],
+            [
+                "road",
+                0.0743087207
+            ],
+            [
+                "university",
+                0.0582744222
+            ],
+            [
+                "students",
+                0.0554152435
+            ],
+            [
+                "colombo",
+                0.0551243324
+            ],
+            [
+                "blocked",
+                0.05023507
+            ],
+            [
+                "march",
+                0.0466049649
+            ],
+            [
+                "staged",
+                0.0463593082
+            ],
+            [
+                "near",
+                0.0443344132
+            ]
+        ],
+        "perc": 0.9995590181
+    },
+    {
+        "Topic": 26,
+        "Count": 1104,
+        "Name": "26_imf_monetary_fund_bank",
+        "Custom Name" : "IMF, Debt Restructuring & Central Bank",
+        "Representation": [
+            "imf",
+            "monetary",
+            "fund",
+            "bank",
+            "cbsl",
+            "central",
+            "debt",
+            "international",
+            "governor",
+            "restructuring"
+        ],
+        "Representative_Docs": [
+            "talks imf kick discussions visiting delegation international monetary fund imf governor central bank dr nandalal weerasinghe finalize bailout package including restructuring debt usd billion amid nation worst financial crisis seven decades kicked morning",
+            "president imf delegation discuss review eff president anura kumara dissanayake representatives international monetary fund imf held discussions future review extended fund facility imf",
+            "upcoming talks imf debt restructuring purposes cbsl governor central bank governor ajith nivard cabraal denied media reports stated meetings authorities international monetary fund imf officials weeks purpose debt restructuring"
+        ],
+        "word_weight": [
+            [
+                "imf",
+                0.1670396503
+            ],
+            [
+                "monetary",
+                0.1011252645
+            ],
+            [
+                "fund",
+                0.0979352593
+            ],
+            [
+                "bank",
+                0.0936157544
+            ],
+            [
+                "cbsl",
+                0.0868750635
+            ],
+            [
+                "central",
+                0.0853572445
+            ],
+            [
+                "debt",
+                0.0808591818
+            ],
+            [
+                "international",
+                0.0755083317
+            ],
+            [
+                "governor",
+                0.0519794026
+            ],
+            [
+                "restructuring",
+                0.044903741
+            ]
+        ],
+        "perc": 0.9015630359
+    },
+    {
+        "Topic": 27,
+        "Count": 377,
+        "Name": "27_commander_army_navy_air",
+        "Custom Name" : "Military Commanders: Army, Navy & Air Force",
+        "Representation": [
+            "commander",
+            "army",
+            "navy",
+            "air",
+            "chief",
+            "admiral",
+            "staff",
+            "force",
+            "general",
+            "promoted"
+        ],
+        "Representative_Docs": [
+            "chief staff indian navy meets navy commander admiral dinesh tripathi chief naval staff indian navy day official visit met commander navy vice admiral kanchana banagoda navy headquarters colombo",
+            "air force commander calls navy commander commander air force air marshal gagan bulathsinghala paid visit commander navy vice admiral jayantha perera morning",
+            "navy commander air force commander meet newly appointed navy commander vice admiral somathilake dissanayake meets air force commander air chief marshal wdrmj goonetileke air force headquarters fort january pic sanjeewa lasantha"
+        ],
+        "word_weight": [
+            [
+                "commander",
+                0.19287743
+            ],
+            [
+                "army",
+                0.1886664435
+            ],
+            [
+                "navy",
+                0.147003246
+            ],
+            [
+                "air",
+                0.1435679808
+            ],
+            [
+                "chief",
+                0.14204141
+            ],
+            [
+                "admiral",
+                0.1138300813
+            ],
+            [
+                "staff",
+                0.1047483562
+            ],
+            [
+                "force",
+                0.0905060192
+            ],
+            [
+                "general",
+                0.0767638035
+            ],
+            [
+                "promoted",
+                0.0703324445
+            ]
+        ],
+        "perc": 0.3078707106
+    },
+    {
+        "Topic": 28,
+        "Count": 357,
+        "Name": "28_easter_attacks_sunday_terror",
+        "Custom Name" : "Easter Sunday Attacks & PCOI Inquiry",
+        "Representation": [
+            "easter",
+            "attacks",
+            "sunday",
+            "terror",
+            "pcoi",
+            "committee",
+            "inquiry",
+            "select",
+            "commission",
+            "probing"
+        ],
+        "Representative_Docs": [
+            "maithripala arrives pcoi easter attacks th day president maithripala sirisena arrived presidential commission inquiry pcoi probing easter sunday terror attacks",
+            "maithripala arrives pcoi easter attacks president maithripala sirisena arrived presidential commission inquiry probing easter sunday terror attacks short ago",
+            "maithripala arrives pcoi easter attacks president maithripala sirisena arrived presidential commission inquiry probing easter sunday terror attacks"
+        ],
+        "word_weight": [
+            [
+                "easter",
+                0.3221904215
+            ],
+            [
+                "attacks",
+                0.283342153
+            ],
+            [
+                "sunday",
+                0.1702474677
+            ],
+            [
+                "terror",
+                0.098844892
+            ],
+            [
+                "pcoi",
+                0.079389497
+            ],
+            [
+                "committee",
+                0.0646824534
+            ],
+            [
+                "inquiry",
+                0.0628107716
+            ],
+            [
+                "select",
+                0.0621268981
+            ],
+            [
+                "commission",
+                0.0618400012
+            ],
+            [
+                "probing",
+                0.061402221
+            ]
+        ],
+        "perc": 0.2915380469
+    },
+    {
+        "Topic": 29,
+        "Count": 204,
+        "Name": "29_navy_ship_naval_port",
+        "Custom Name" : "Naval Ships & Port Visits",
+        "Representation": [
+            "navy",
+            "ship",
+            "naval",
+            "port",
+            "colombo",
+            "arrived",
+            "ships",
+            "visit",
+            "goodwill",
+            "exercise"
+        ],
+        "Representative_Docs": [
+            "japanese naval ships arrive port colombo japanese naval ships arrived port colombo goodwill replenishment visit welcomed navy accordance naval traditions arrival",
+            "pakistan navy ships arrive colombo pakistan navy ship pns taimur aslat arrived port colombo goodwill visit navy said visiting ships welcomed navy compliance naval traditions",
+            "indian naval ship arrives colombo port navy accordance naval traditions welcomed indian naval ship sukanya arrived port colombo logistic support"
+        ],
+        "word_weight": [
+            [
+                "navy",
+                0.2356068667
+            ],
+            [
+                "ship",
+                0.2269795458
+            ],
+            [
+                "naval",
+                0.2225099115
+            ],
+            [
+                "port",
+                0.1870395138
+            ],
+            [
+                "colombo",
+                0.1765211077
+            ],
+            [
+                "arrived",
+                0.120717302
+            ],
+            [
+                "ships",
+                0.1076801795
+            ],
+            [
+                "visit",
+                0.1014655832
+            ],
+            [
+                "goodwill",
+                0.091218393
+            ],
+            [
+                "exercise",
+                0.0735350641
+            ]
+        ],
+        "perc": 0.1665931697
+    }
+]
