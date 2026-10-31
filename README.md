@@ -2,6 +2,7 @@
 
 News Archive Explorer is a small FastAPI web application for exploring topics discovered from a news archive with BERTopic.  
 It presents topic sizes, trends over time, representative headlines, topic words, topic comparisons, and the model configuration used to create the export.
+Now live [HERE!](https://news-archive-explorer.vercel.app/)
 
 ## Features
 
